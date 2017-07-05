@@ -16,6 +16,15 @@ variable "name" {
   description = "The name of the Auto Scaling Group"
 }
 
+
+variable "min_size" {
+  description = "The maximum size of the auto scale group"
+}
+
+variable "max_size" {
+  description = "The minimum size of the auto scale group."
+}
+
 // Launch Configuration
 
 variable "ami" {
@@ -95,19 +104,13 @@ variable "health_check_type" {
   default     = "ELB"
 }
 
-variable "max_size" {
-  default = 5
-}
-
-variable "min_size" {
-  default = 2
-}
-
 variable "wait_for_elb_capacity" {
+  description = "Setting this will cause Terraform to wait for exactly this number of healthy instances in all attached load balancers on both create and update operations."
   default = 2
 }
 
 variable "desired_capacity" {
+  description = " The number of Amazon EC2 instances that should be running in the group."
   default = 2
 }
 
