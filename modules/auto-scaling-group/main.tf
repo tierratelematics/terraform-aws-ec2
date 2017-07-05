@@ -16,7 +16,7 @@ resource "aws_autoscaling_group" "asg" {
   vpc_zone_identifier = "${var.vpc_subnets}"
 
   # interpolate the LC into the ASG name so it always forces an update
-  name                      = "${var.name} - ${aws_launch_configuration.asg-launch-configuration.name}"
+  name                      = "${var.project}-${var.environment}-${var.name} - ${aws_launch_configuration.asg-launch-configuration.name}"
   max_size                  = "${var.max_size}"
   min_size                  = "${var.min_size}"
   wait_for_elb_capacity     = "${var.wait_for_elb_capacity}"
@@ -57,6 +57,7 @@ resource "aws_launch_configuration" "asg-launch-configuration" {
     create_before_destroy = true
   }
 
+  name_prefix = "${var.project}-${var.environment}-${var.name}-lc"
   image_id      = "${var.ami}"
   instance_type = "${var.instance_type}"
 
