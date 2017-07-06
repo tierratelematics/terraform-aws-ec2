@@ -49,6 +49,11 @@ variable "alb_certificate_arn" {
  * Optional Variables.
  */
 
+variable "iam_instance_profile" {
+  description = "The IAM instance profile to associate with launched instances."
+  default = ""
+}
+
 variable "vpc_security_groups" {
   type        = "list"
   description = "A list of associated security group IDS."
@@ -118,6 +123,12 @@ variable "health_check_grace_period" {
   description = "Time after instance comes into service before checking health."
   default     = 300
 }
+
+variable "wait_for_capacity_timeout" {
+  description = "A maximum duration that Terraform should wait for ASG instances to be healthy before timing out. Setting this to '0' causes Terraform to skip all Capacity Waiting behavior."
+  default = "10m"
+}
+
 
 variable "ec2_maintenance_ports" {
   type    = "list"

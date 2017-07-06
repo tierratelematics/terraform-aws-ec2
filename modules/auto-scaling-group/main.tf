@@ -64,6 +64,8 @@ resource "aws_launch_configuration" "asg-launch-configuration" {
   # Our Security group to allow HTTP and SSH access
   security_groups = ["${aws_security_group.alb-target-port-sg.id}", "${aws_security_group.ec2-maintenance-ports-sg.*.id}"]
 
+  iam_instance_profile = "${var.iam_instance_profile }"
+
   key_name                    = "${var.key_name}"
   user_data                   = "${var.user_data}"
   associate_public_ip_address = "${var.associate_public_ip_address}"
