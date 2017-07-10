@@ -137,4 +137,6 @@ module "alb" {
 
   ssl_certificate_arn = "${var.alb_certificate_arn}"
   target_port         = "${var.alb_target_port}"
+
+  health_check_path = "${var.health_check_path}"
 }

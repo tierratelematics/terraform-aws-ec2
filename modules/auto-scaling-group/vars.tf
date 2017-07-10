@@ -129,6 +129,10 @@ variable "wait_for_capacity_timeout" {
   default = "10m"
 }
 
+variable "health_check_path" {
+  description = "The destination for the health check request."
+  default = "/health"
+}
 
 variable "ec2_maintenance_ports" {
   type    = "list"
