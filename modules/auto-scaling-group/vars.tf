@@ -16,7 +16,6 @@ variable "name" {
   description = "The name of the Auto Scaling Group"
 }
 
-
 variable "min_size" {
   description = "The maximum size of the auto scale group"
 }
@@ -51,7 +50,7 @@ variable "alb_certificate_arn" {
 
 variable "iam_instance_profile" {
   description = "The IAM instance profile to associate with launched instances."
-  default = ""
+  default     = ""
 }
 
 variable "vpc_security_groups" {
@@ -111,12 +110,12 @@ variable "health_check_type" {
 
 variable "wait_for_elb_capacity" {
   description = "Setting this will cause Terraform to wait for exactly this number of healthy instances in all attached load balancers on both create and update operations."
-  default = 2
+  default     = 2
 }
 
 variable "desired_capacity" {
   description = " The number of Amazon EC2 instances that should be running in the group."
-  default = 2
+  default     = 2
 }
 
 variable "health_check_grace_period" {
@@ -126,12 +125,32 @@ variable "health_check_grace_period" {
 
 variable "wait_for_capacity_timeout" {
   description = "A maximum duration that Terraform should wait for ASG instances to be healthy before timing out. Setting this to '0' causes Terraform to skip all Capacity Waiting behavior."
-  default = "10m"
+  default     = "10m"
+}
+
+variable "health_check_healthy_threshold" {
+  description = "The number of consecutive health checks successes required before considering an unhealthy target healthy."
+  default     = "3"
+}
+
+variable "health_check_unhealthy_threshold" {
+  description = "The number of consecutive health check failures required before considering the target unhealthy."
+  default     = "2"
+}
+
+variable "health_check_timeout" {
+  description = "The amount of time, in seconds, during which no response means a failed health check."
+  default     = "5"
+}
+
+variable "health_check_interval" {
+  description = "The approximate amount of time, in seconds, between health checks of an individual target. Minimum value 5 seconds, Maximum value 300 seconds."
+  default     = "15"
 }
 
 variable "health_check_path" {
   description = "The destination for the health check request."
-  default = "/health"
+  default     = "/health"
 }
 
 variable "ec2_maintenance_ports" {
