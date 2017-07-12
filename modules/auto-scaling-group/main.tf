@@ -144,3 +144,21 @@ module "alb" {
   health_check_interval            = "${var.health_check_interval}"
   health_check_path                = "${var.health_check_path}"
 }
+
+resource "aws_route53_record" "service-alias" {
+  zone_id = "${var.external_zone_id}"
+  name    = "lb-${var.project}-${var.name}.${var.environment}.${var.external_dns_name}"
+  type    = "A"
+
+  weighted_routing_policy {
+    weight = 1
+  }
+
+  set_identifier = "lb-${var.project}-${var.name}"
+
+  alias {
+    name                   = "${module.alb.alb_dns_name}"
+    zone_id                = "${module.alb.alb_zone_id}"
+    evaluate_target_health = false
+  }
+}

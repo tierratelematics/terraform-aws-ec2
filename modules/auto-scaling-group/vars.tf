@@ -30,6 +30,16 @@ variable "ami" {
   description = "The EC2 image ID to launch."
 }
 
+/// ROUTE 53
+variable "external_zone_id" {
+
+}
+
+variable "external_dns_name" {
+
+}
+
+
 // VPC
 
 variable "vpc_id" {
