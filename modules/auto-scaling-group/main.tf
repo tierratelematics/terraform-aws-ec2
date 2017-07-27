@@ -134,6 +134,7 @@ module "alb" {
 
   security_vpc_id = "${var.vpc_id}"
   subnet_ids      = "${var.vpc_subnets}"
+  protocol        = "${var.alb_target_protocol}"
 
   ssl_certificate_arn = "${var.alb_certificate_arn}"
   target_port         = "${var.alb_target_port}"

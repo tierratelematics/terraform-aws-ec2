@@ -50,6 +50,11 @@ variable "alb_target_port" {
   description = "Service port on the EC2 that will be exposed using the Application Load Balancer"
 }
 
+
+variable "alb_target_protocol" {
+  default = "HTTPS"
+}
+
 variable "alb_certificate_arn" {
   description = "IAM certificate ARN used on the Application Load Balancer listener"
 }
