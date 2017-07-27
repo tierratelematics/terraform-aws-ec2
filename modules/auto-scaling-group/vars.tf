@@ -163,6 +163,10 @@ variable "health_check_path" {
   default     = "/health"
 }
 
+variable "health_check_port" {
+  description = "The port for the health check request."
+}
+
 variable "ec2_maintenance_ports" {
   type    = "list"
   default = []

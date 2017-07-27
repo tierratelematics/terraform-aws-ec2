@@ -126,7 +126,7 @@ resource "aws_security_group" "ec2-maintenance-ports-sg" {
 }
 
 module "alb" {
-  source = "git::https://github.com/tierratelematics/terraform-aws-ecs.git//modules/alb?ref=0.3.1"
+  source = "git::https://github.com/tierratelematics/terraform-aws-ecs.git//modules/alb?ref=0.5.0"
 
   project     = "${var.project}"
   environment = "${var.environment}"
@@ -143,6 +143,7 @@ module "alb" {
   health_check_timeout             = "${var.health_check_timeout}"
   health_check_interval            = "${var.health_check_interval}"
   health_check_path                = "${var.health_check_path}"
+  health_check_port                = "${var.health_check_port}"
 }
 
 resource "aws_route53_record" "service-alias" {
