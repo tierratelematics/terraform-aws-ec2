@@ -1,10 +1,11 @@
-/**
- * Resources.
- */
 
 terraform {
   required_version = ">= 0.9, < 0.10"
 }
+
+/**
+ * Resources.
+ */
 
 resource "aws_autoscaling_group" "asg" {
   lifecycle {
@@ -25,7 +26,9 @@ resource "aws_autoscaling_group" "asg" {
   health_check_type         = "${var.health_check_type}"
   launch_configuration      = "${aws_launch_configuration.asg-launch-configuration.id}"
 
-  target_group_arns = ["${module.alb.alb_target_group_arn}"]
+  //  target_group_arns = ["${module.alb.alb_target_group_arn}"]
+  target_group_arns = ["${var.target_group_arns}"]
+  load_balancers    = ["${var.load_balancers}"]
 
   tag {
     key                 = "Name"
@@ -62,39 +65,14 @@ resource "aws_launch_configuration" "asg-launch-configuration" {
   instance_type = "${var.instance_type}"
 
   # Our Security group to allow HTTP and SSH access
-  security_groups = ["${aws_security_group.alb-target-port-sg.id}", "${aws_security_group.ec2-maintenance-ports-sg.*.id}"]
+  // security_groups = "${concat(var.vpc_security_groups, list(aws_security_group.ec2-maintenance-ports-sg.*.id))}"
+  security_groups = ["${concat(var.vpc_security_groups, aws_security_group.ec2-maintenance-ports-sg.*.id)}"]
 
   iam_instance_profile = "${var.iam_instance_profile }"
 
   key_name                    = "${var.key_name}"
   user_data                   = "${var.user_data}"
   associate_public_ip_address = "${var.associate_public_ip_address}"
-}
-
-resource "aws_security_group" "alb-target-port-sg" {
-  name        = "${var.project}-${var.environment}-asg-${var.name}-alb-port-${var.alb_target_port}"
-  description = "Security group for port ${var.alb_target_port} on ASG that allows web traffic inside the VPC"
-  vpc_id      = "${var.vpc_id}"
-
-  ingress {
-    from_port   = "${var.alb_target_port}"
-    to_port     = "${var.alb_target_port}"
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port   = "0"
-    to_port     = "0"
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  tags {
-    Name        = "${var.project}-${var.environment}-asg-${var.name}-alb-port-${var.alb_target_port}"
-    environment = "${var.environment}"
-    application = "${var.project}"
-  }
 }
 
 resource "aws_security_group" "ec2-maintenance-ports-sg" {
@@ -122,45 +100,5 @@ resource "aws_security_group" "ec2-maintenance-ports-sg" {
     Name        = "${var.project}-${var.environment}-asg-${var.name}-ec2-maintenance-port-${element(var.ec2_maintenance_ports, count.index)}"
     environment = "${var.environment}"
     application = "${var.project}"
-  }
-}
-
-module "alb" {
-  source = "git::https://github.com/tierratelematics/terraform-aws-ecs.git//modules/alb?ref=0.5.0"
-
-  project     = "${var.project}"
-  environment = "${var.environment}"
-  name        = "${var.name}"
-
-  security_vpc_id = "${var.vpc_id}"
-  subnet_ids      = "${var.vpc_subnets}"
-  protocol        = "${var.alb_target_protocol}"
-
-  ssl_certificate_arn = "${var.alb_certificate_arn}"
-  target_port         = "${var.alb_target_port}"
-
-  health_check_healthy_threshold   = "${var.health_check_healthy_threshold}"
-  health_check_unhealthy_threshold = "${var.health_check_unhealthy_threshold}"
-  health_check_timeout             = "${var.health_check_timeout}"
-  health_check_interval            = "${var.health_check_interval}"
-  health_check_path                = "${var.health_check_path}"
-  health_port                      = "${var.health_check_port}"
-}
-
-resource "aws_route53_record" "service-alias" {
-  zone_id = "${var.external_zone_id}"
-  name    = "lb-${var.project}-${var.name}.${var.environment}.${var.external_dns_name}"
-  type    = "A"
-
-  weighted_routing_policy {
-    weight = 1
-  }
-
-  set_identifier = "lb-${var.project}-${var.name}"
-
-  alias {
-    name                   = "${module.alb.alb_dns_name}"
-    zone_id                = "${module.alb.alb_zone_id}"
-    evaluate_target_health = false
   }
 }

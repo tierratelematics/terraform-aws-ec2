@@ -10,7 +10,9 @@ variable "environment" {
   description = "Name of environment (i.e. dev, test, prod)"
 }
 
+//
 // Auto Scaling Group
+//
 
 variable "name" {
   description = "The name of the Auto Scaling Group"
@@ -24,38 +26,45 @@ variable "max_size" {
   description = "The minimum size of the auto scale group."
 }
 
+//
 // Launch Configuration
+//
 
 variable "ami" {
   description = "The EC2 image ID to launch."
 }
 
-///// ROUTE 53
-//variable "external_zone_id" {
 //
-//}
+// Route 53
 //
-//variable "external_dns_name" {
-//
-//}
 
+variable "external_zone_id" {}
+
+variable "external_dns_name" {}
+
+//
 // VPC
+//
 
 variable "vpc_id" {
   description = "VPC ID."
 }
 
-//variable "alb_target_port" {
-//  description = "Service port on the EC2 that will be exposed using the Application Load Balancer"
-//}
-
-//variable "alb_target_protocol" {
-//  default = "HTTPS"
-//}
 //
-//variable "alb_certificate_arn" {
-//  description = "IAM certificate ARN used on the Application Load Balancer listener"
-//}
+// ALB
+//
+
+variable "alb_target_port" {
+  description = "Service port on the EC2 that will be exposed using the Application Load Balancer"
+}
+
+variable "alb_target_protocol" {
+  default = "HTTPS"
+}
+
+variable "alb_certificate_arn" {
+  description = "IAM certificate ARN used on the Application Load Balancer listener"
+}
 
 /**
  * Optional Variables.
@@ -141,38 +150,37 @@ variable "health_check_grace_period" {
   default     = 300
 }
 
-//
-//variable "wait_for_capacity_timeout" {
-//  description = "A maximum duration that Terraform should wait for ASG instances to be healthy before timing out. Setting this to '0' causes Terraform to skip all Capacity Waiting behavior."
-//  default     = "10m"
-//}
-//
-//variable "health_check_healthy_threshold" {
-//  description = "The number of consecutive health checks successes required before considering an unhealthy target healthy."
-//  default     = "3"
-//}
-//
-//variable "health_check_unhealthy_threshold" {
-//  description = "The number of consecutive health check failures required before considering the target unhealthy."
-//  default     = "2"
-//}
-//
-//variable "health_check_timeout" {
-//  description = "The amount of time, in seconds, during which no response means a failed health check."
-//  default     = "5"
-//}
-//
-//variable "health_check_interval" {
-//  description = "The approximate amount of time, in seconds, between health checks of an individual target. Minimum value 5 seconds, Maximum value 300 seconds."
-//  default     = "15"
-//}
-//
-//variable "health_check_path" {
-//  description = "The destination for the health check request."
-//  default     = "/health"
-//}
-//
-//variable "health_check_port" {
-//  description = "The port for the health check request."
-//}
+variable "wait_for_capacity_timeout" {
+  description = "A maximum duration that Terraform should wait for ASG instances to be healthy before timing out. Setting this to '0' causes Terraform to skip all Capacity Waiting behavior."
+  default     = "10m"
+}
 
+variable "health_check_healthy_threshold" {
+  description = "The number of consecutive health checks successes required before considering an unhealthy target healthy."
+  default     = "3"
+}
+
+variable "health_check_unhealthy_threshold" {
+  description = "The number of consecutive health check failures required before considering the target unhealthy."
+  default     = "2"
+}
+
+variable "health_check_timeout" {
+  description = "The amount of time, in seconds, during which no response means a failed health check."
+  default     = "5"
+}
+
+variable "health_check_interval" {
+  description = "The approximate amount of time, in seconds, between health checks of an individual target. Minimum value 5 seconds, Maximum value 300 seconds."
+  default     = "15"
+}
+
+variable "health_check_path" {
+  description = "The destination for the health check request."
+  default     = "/health"
+}
+
+variable "health_check_port" {
+  description = "The port for the health check request."
+  default     = "8080"
+}
