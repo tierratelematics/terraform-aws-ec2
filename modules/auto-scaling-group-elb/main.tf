@@ -26,7 +26,8 @@ module "auto-scaling-group" {
   iam_instance_profile        = "${var.iam_instance_profile}"
   ec2_maintenance_ports       = ["${var.ec2_maintenance_ports}", "${var.health_check_port}"]
   user_data                   = "${var.user_data}"
-  load_balancers              = ["${module.elb.elb_name}"]
+
+  load_balancers = ["${module.elb.elb_name}"]
 }
 
 module "elb" {
@@ -37,6 +38,12 @@ module "elb" {
   name        = "${var.name}"
   vpc_id      = "${var.vpc_id}"
   vpc_subnets = "${var.vpc_subnets}"
+
+  lb_port             = "${var.elb_port}"
+  lb_protocol         = "${var.elb_protocol}"
+  instance_port       = "${var.elb_target_port}"
+  instance_protocol   = "${var.elb_target_protocol}"
+  health_check_target = "${var.health_check_protocol}:${var.health_check_port}${var.health_check_path}"
 }
 
 resource "aws_route53_record" "service-alias" {

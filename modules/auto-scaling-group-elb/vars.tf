@@ -10,7 +10,9 @@ variable "environment" {
   description = "Name of environment (i.e. dev, test, prod)"
 }
 
+//
 // Auto Scaling Group
+//
 
 variable "name" {
   description = "The name of the Auto Scaling Group"
@@ -24,11 +26,14 @@ variable "max_size" {
   description = "The minimum size of the auto scale group."
 }
 
+//
 // Launch Configuration
+//
 
 variable "ami" {
   description = "The EC2 image ID to launch."
 }
+
 
 //
 // Route 53
@@ -57,6 +62,22 @@ variable "vpc_id" {
 //variable "alb_certificate_arn" {
 //  description = "IAM certificate ARN used on the Application Load Balancer listener"
 //}
+
+variable "elb_port" {
+  description = "The port to listen on for the load balancer."
+}
+variable "elb_protocol" {
+  description = "The protocol to listen on. Valid values are HTTP, HTTPS, TCP, or SSL"
+}
+
+variable "elb_target_port" {
+  description = "The port on the instance to route to."
+}
+
+variable "elb_target_protocol" {
+  description = "Protocol on the EC2 that will be exposed using the Classic Load Balancer. Valid values are HTTP, HTTPS, TCP, or SSL"
+}
+
 
 /**
  * Optional Variables.
@@ -162,14 +183,19 @@ variable "health_check_interval" {
   default     = "15"
 }
 
-//variable "health_check_path" {
-//  description = "The destination for the health check request."
-//  default     = "/health"
-//}
+variable "health_check_protocol" {
+  description = "The protocol for the health check request."
+  default     = "HTTP"
+}
+
+variable "health_check_path" {
+  description = "The destination for the health check request."
+  default     = "/health"
+}
 
 variable "health_check_port" {
   description = "The port for the health check request."
-  default = "80"
+  default     = "80"
 }
 
 variable "ec2_maintenance_ports" {

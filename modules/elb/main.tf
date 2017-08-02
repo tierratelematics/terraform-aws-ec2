@@ -33,7 +33,6 @@ resource "aws_elb" "elb" {
   }
 }
 
-
 resource "aws_security_group" "elb_security_group" {
   name        = "${var.project}-${var.environment}-sg-${var.name}-lb"
   description = "${var.name} load balancer security group"

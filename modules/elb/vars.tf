@@ -49,26 +49,25 @@ variable "lb_protocol" {
 
 variable "health_check_healthy_threshold" {
   description = "The number of checks before the instance is declared healthy."
-  default = "2"
+  default     = "2"
 }
 
 variable "health_check_unhealthy_threshold" {
   description = "The number of checks before the instance is declared unhealthy."
-  default = "5"
+  default     = "5"
 }
 
 variable "health_check_timeout" {
   description = "The length of time before the check times out."
-  default = "10"
+  default     = "10"
 }
 
 variable "health_check_interval" {
   description = "The interval between checks"
-  default = "10"
+  default     = "10"
 }
 
 variable "health_check_target" {
   description = "The target of the check. Valid pattern is #{PROTOCOL}:#{PORT}#{PATH}, where PROTOCOL values are HTTP, HTTPS - PORT and PATH are required, TCP, SSL - PORT is required, PATH is not supported"
-  default = "HTTP:80/health"
+  default     = "HTTP:80/health"
 }
-
