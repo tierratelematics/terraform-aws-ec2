@@ -48,23 +48,23 @@ variable "lb_protocol" {
 }
 
 variable "health_check_healthy_threshold" {
-  description = "The number of checks before the instance is declared healthy."
-  default     = "2"
+  description = "The number of consecutive successful health checks that must occur before declaring an EC2 instance healthy. Valid values: 2 to 10."
+  default     = "10"
 }
 
 variable "health_check_unhealthy_threshold" {
-  description = "The number of checks before the instance is declared unhealthy."
-  default     = "5"
+  description = "The number of consecutive failed health checks that must occur before declaring an EC2 instance unhealthy. Valid values: 2 to 10."
+  default     = "2"
 }
 
 variable "health_check_timeout" {
-  description = "The length of time before the check times out."
-  default     = "10"
+  description = "The amount of time to wait when receiving a response from the health check, in seconds. Valid values: 2 to 60."
+  default     = "5"
 }
 
 variable "health_check_interval" {
-  description = "The interval between checks"
-  default     = "10"
+  description = "The amount of time between health checks of an individual instance, in seconds. Valid values: 5 to 300"
+  default     = "30"
 }
 
 variable "health_check_target" {
