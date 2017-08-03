@@ -1,3 +1,4 @@
+
 /**
  * Resources.
  */
@@ -22,9 +23,9 @@ resource "aws_elb" "elb" {
     interval            = "${var.health_check_interval}"
   }
 
-  idle_timeout                = 400
-  connection_draining         = true
-  connection_draining_timeout = 400
+  idle_timeout                = "${var.idle_timeout}"
+  connection_draining         = "${var.connection_draining}"
+  connection_draining_timeout = "${var.connection_draining_timeout}"
 
   tags {
     Name       = "${var.project}-${var.environment}-${var.name}-tg"

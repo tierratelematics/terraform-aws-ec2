@@ -1,3 +1,4 @@
+
 /**
  * Required Variables.
  */
@@ -23,6 +24,7 @@ variable "vpc_subnets" {
   description = "A list of subnet IDs to launch resources in."
 }
 
+
 /**
  * Options.
  */
@@ -45,6 +47,21 @@ variable "lb_port" {
 variable "lb_protocol" {
   description = "The protocol to listen on. Valid values are HTTP, HTTPS, TCP, or SSL"
   default     = "HTTP"
+}
+
+variable "idle_timeout" {
+  description = "The time in seconds that the connection is allowed to be idle."
+  default = "60"
+}
+
+variable "connection_draining" {
+  description = "Boolean to enable connection draining."
+  default = false
+}
+
+variable "connection_draining_timeout" {
+  description = "The time in seconds to allow for connections to drain."
+  default = "300"
 }
 
 variable "health_check_healthy_threshold" {
