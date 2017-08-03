@@ -1,3 +1,4 @@
+
 /**
  * Required Variables.
  */
@@ -50,18 +51,6 @@ variable "external_dns_name" {}
 variable "vpc_id" {
   description = "VPC ID."
 }
-
-//variable "alb_target_port" {
-//  description = "Service port on the EC2 that will be exposed using the Application Load Balancer"
-//}
-//
-//variable "alb_target_protocol" {
-//  default = "HTTPS"
-//}
-//
-//variable "alb_certificate_arn" {
-//  description = "IAM certificate ARN used on the Application Load Balancer listener"
-//}
 
 variable "elb_port" {
   description = "The port to listen on for the load balancer."

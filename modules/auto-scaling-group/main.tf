@@ -64,7 +64,6 @@ resource "aws_launch_configuration" "asg-launch-configuration" {
   instance_type = "${var.instance_type}"
 
   # Our Security group to allow HTTP and SSH access
-  // security_groups = "${concat(var.vpc_security_groups, list(aws_security_group.ec2-maintenance-ports-sg.*.id))}"
   security_groups = ["${concat(var.vpc_security_groups, aws_security_group.ec2-maintenance-ports-sg.*.id)}"]
 
   iam_instance_profile = "${var.iam_instance_profile }"
