@@ -46,6 +46,11 @@ resource "aws_autoscaling_group" "asg" {
     value               = "${var.environment}"
     propagate_at_launch = true
   }
+  tag {
+    key                 = "Role"
+    value               = "${var.ec2_role_tag}"
+    propagate_at_launch = true
+  }
 
   tag {
     key                 = "AMI"

@@ -11,7 +11,9 @@ variable "environment" {
   description = "Name of environment (i.e. dev, test, prod)"
 }
 
+//
 // Auto Scaling Group
+//
 
 variable "name" {
   description = "The name of the Auto Scaling Group"
@@ -47,6 +49,11 @@ variable "vpc_id" {
 variable "ec2_maintenance_ports" {
   type    = "list"
   default = []
+}
+
+variable "ec2_role_tag" {
+  description = "Role tag value applied to the EC2 instances created by ASG."
+  default = "ASG"
 }
 
 variable "iam_instance_profile" {
