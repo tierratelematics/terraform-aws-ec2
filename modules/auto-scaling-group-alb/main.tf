@@ -12,7 +12,7 @@ module "auto-scaling-group" {
 
   project                = "${var.project}"
   environment            = "${var.environment}"
-  name                   = "${var.name}"
+  component              = "${var.component}"
   ami                    = "${var.ami}"
   vpc_id                 = "${var.vpc_id}"
   vpc_availability_zones = "${var.vpc_availability_zones}"
@@ -35,7 +35,7 @@ module "alb" {
 
   project     = "${var.project}"
   environment = "${var.environment}"
-  name        = "${var.name}"
+  name        = "${var.component}"
 
   security_vpc_id = "${var.vpc_id}"
   subnet_ids      = "${var.vpc_subnets}"
@@ -54,14 +54,14 @@ module "alb" {
 
 resource "aws_route53_record" "service-alias" {
   zone_id = "${var.external_zone_id}"
-  name    = "lb-${var.project}-${var.name}.${var.environment}.${var.external_dns_name}"
+  name    = "lb-${var.project}-${var.component}.${var.environment}.${var.external_dns_name}"
   type    = "A"
 
   weighted_routing_policy {
     weight = 1
   }
 
-  set_identifier = "lb-${var.project}-${var.name}"
+  set_identifier = "lb-${var.project}-${var.component}"
 
   alias {
     name                   = "${module.alb.alb_dns_name}"
