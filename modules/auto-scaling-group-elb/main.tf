@@ -17,6 +17,7 @@ module "auto-scaling-group" {
   vpc_id                 = "${var.vpc_id}"
   vpc_availability_zones = "${var.vpc_availability_zones}"
   vpc_subnets            = "${var.vpc_subnets}"
+  vpc_security_groups    = "${var.vpc_security_groups}"
   instance_type          = "${var.instance_type}"
   desired_capacity       = "${var.desired_capacity}"
   min_size               = "${var.min_size}"
