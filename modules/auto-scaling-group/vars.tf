@@ -11,13 +11,13 @@ variable "environment" {
   description = "Name of environment (i.e. dev, test, prod)"
 }
 
+variable "component" {
+  description = "The name of component hosted in the Auto Scaling Group"
+}
+
 //
 // Auto Scaling Group
 //
-
-variable "name" {
-  description = "The name of the Auto Scaling Group"
-}
 
 variable "min_size" {
   description = "The maximum size of the auto scale group"
@@ -27,7 +27,9 @@ variable "max_size" {
   description = "The minimum size of the auto scale group."
 }
 
+//
 // Launch Configuration
+//
 
 variable "ami" {
   description = "The EC2 image ID to launch."

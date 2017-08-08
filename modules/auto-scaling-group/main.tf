@@ -16,7 +16,7 @@ resource "aws_autoscaling_group" "asg" {
   vpc_zone_identifier = "${var.vpc_subnets}"
 
   # interpolate the LC into the ASG name so it always forces an update
-  name                      = "${var.project}-${var.environment}-${var.name}-asg-with-lc-${aws_launch_configuration.asg-launch-configuration.id}"
+  name                      = "${var.project}-${var.environment}-${var.component}-asg-with-lc-${aws_launch_configuration.asg-launch-configuration.id}"
   max_size                  = "${var.max_size}"
   min_size                  = "${var.min_size}"
   wait_for_elb_capacity     = "${var.wait_for_elb_capacity}"
@@ -31,7 +31,7 @@ resource "aws_autoscaling_group" "asg" {
 
   tag {
     key                 = "Name"
-    value               = "${var.project}-${var.environment}-${var.name}"
+    value               = "${var.project}-${var.environment}-${var.component}"
     propagate_at_launch = true
   }
 
@@ -46,6 +46,13 @@ resource "aws_autoscaling_group" "asg" {
     value               = "${var.environment}"
     propagate_at_launch = true
   }
+
+  tag {
+    key                 = "Component"
+    value               = "${var.component}"
+    propagate_at_launch = true
+  }
+
   tag {
     key                 = "Role"
     value               = "${var.ec2_role_tag}"
@@ -64,7 +71,7 @@ resource "aws_launch_configuration" "asg-launch-configuration" {
     create_before_destroy = true
   }
 
-  name_prefix   = "${var.project}-${var.environment}-${var.name}-lc-"
+  name_prefix   = "${var.project}-${var.environment}-${var.component}-lc-"
   image_id      = "${var.ami}"
   instance_type = "${var.instance_type}"
 
@@ -81,7 +88,7 @@ resource "aws_launch_configuration" "asg-launch-configuration" {
 resource "aws_security_group" "ec2-maintenance-ports-sg" {
   count = "${length(var.ec2_maintenance_ports)}"
 
-  name        = "${var.project}-${var.environment}-asg-${var.name}-ec2-maintenance-port-${element(var.ec2_maintenance_ports, count.index)}"
+  name        = "${var.project}-${var.environment}-asg-${var.component}-ec2-maintenance-port-${element(var.ec2_maintenance_ports, count.index)}"
   description = "Security group for port ${element(var.ec2_maintenance_ports, count.index)} on ASG that allows maintenance traffic to the EC2"
   vpc_id      = "${var.vpc_id}"
 
@@ -100,7 +107,7 @@ resource "aws_security_group" "ec2-maintenance-ports-sg" {
   }
 
   tags {
-    Name        = "${var.project}-${var.environment}-asg-${var.name}-ec2-maintenance-port-${element(var.ec2_maintenance_ports, count.index)}"
+    Name        = "${var.project}-${var.environment}-asg-${var.component}-ec2-maintenance-port-${element(var.ec2_maintenance_ports, count.index)}"
     environment = "${var.environment}"
     application = "${var.project}"
   }
