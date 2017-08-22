@@ -1,4 +1,3 @@
-
 terraform {
   required_version = ">= 0.9, < 0.10"
 }
@@ -41,10 +40,10 @@ module "elb" {
   vpc_id      = "${var.vpc_id}"
   vpc_subnets = "${var.vpc_subnets}"
 
-  lb_port             = "${var.elb_port}"
-  lb_protocol         = "${var.elb_protocol}"
-  instance_port       = "${var.elb_target_port}"
-  instance_protocol   = "${var.elb_target_protocol}"
+  lb_port           = "${var.elb_port}"
+  lb_protocol       = "${var.elb_protocol}"
+  instance_port     = "${var.elb_target_port}"
+  instance_protocol = "${var.elb_target_protocol}"
 
   health_check_target = "${var.health_check_protocol}:${var.health_check_port}${var.health_check_path}"
 }

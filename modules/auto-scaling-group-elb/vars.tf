@@ -1,4 +1,3 @@
-
 /**
  * Required Variables.
  */
@@ -35,7 +34,6 @@ variable "ami" {
   description = "The EC2 image ID to launch."
 }
 
-
 //
 // Route 53
 //
@@ -55,6 +53,7 @@ variable "vpc_id" {
 variable "elb_port" {
   description = "The port to listen on for the load balancer."
 }
+
 variable "elb_protocol" {
   description = "The protocol to listen on. Valid values are HTTP, HTTPS, TCP, or SSL"
 }
@@ -66,7 +65,6 @@ variable "elb_target_port" {
 variable "elb_target_protocol" {
   description = "Protocol on the EC2 that will be exposed using the Classic Load Balancer. Valid values are HTTP, HTTPS, TCP, or SSL"
 }
-
 
 /**
  * Optional Variables.

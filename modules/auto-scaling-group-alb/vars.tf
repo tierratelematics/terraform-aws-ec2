@@ -1,4 +1,3 @@
-
 /**
  * Required Variables.
  */
