@@ -99,6 +99,21 @@ variable "load_balancers" {
   default     = []
 }
 
+variable "idle_timeout" {
+  description = "The time in seconds that the connection is allowed to be idle."
+  default     = 60
+}
+
+variable "connection_draining" {
+  description = "Boolean to enable connection draining."
+  default     = false
+}
+
+variable "connection_draining_timeout" {
+  description = "The time in seconds to allow for connections to drain."
+  default     = 300
+}
+
 variable "target_group_arns" {
   type        = "list"
   description = "A list of aws_alb_target_group ARNs, for use with Application Load Balancing."

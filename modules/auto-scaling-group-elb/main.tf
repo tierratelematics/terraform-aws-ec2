@@ -42,10 +42,13 @@ module "elb" {
   vpc_id      = "${var.vpc_id}"
   vpc_subnets = "${var.vpc_subnets}"
 
-  lb_port           = "${var.elb_port}"
-  lb_protocol       = "${var.elb_protocol}"
-  instance_port     = "${var.elb_target_port}"
-  instance_protocol = "${var.elb_target_protocol}"
+  lb_port                     = "${var.elb_port}"
+  lb_protocol                 = "${var.elb_protocol}"
+  instance_port               = "${var.elb_target_port}"
+  instance_protocol           = "${var.elb_target_protocol}"
+  idle_timeout                = "${var.idle_timeout}"
+  connection_draining         = "${var.connection_draining}"
+  connection_draining_timeout = "${var.connection_draining_timeout}"
 
   health_check_target = "${var.health_check_protocol}:${var.health_check_port}${var.health_check_path}"
 }
