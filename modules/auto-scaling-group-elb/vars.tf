@@ -110,6 +110,11 @@ variable "instance_type" {
   default     = "t2.micro"
 }
 
+variable "ec2_maintenance_ports" {
+  type    = "list"
+  default = []
+}
+
 variable "key_name" {
   description = "The key name that should be used for the instance."
   default     = ""
@@ -125,10 +130,9 @@ variable "user_data" {
   default     = false
 }
 
-variable "health_check_type" {
-  description = "Controls how health checking is done."
-  default     = "ELB"
-}
+//
+// Capacity
+//
 
 variable "wait_for_elb_capacity" {
   description = "Setting this will cause Terraform to wait for exactly this number of healthy instances in all attached load balancers on both create and update operations."
@@ -145,14 +149,23 @@ variable "desired_capacity" {
   default     = 2
 }
 
-variable "health_check_grace_period" {
-  description = "Time after instance comes into service before checking health."
-  default     = 300
-}
-
 variable "wait_for_capacity_timeout" {
   description = "A maximum duration that Terraform should wait for ASG instances to be healthy before timing out. Setting this to '0' causes Terraform to skip all Capacity Waiting behavior."
   default     = "10m"
+}
+
+//
+// Health check
+//
+
+variable "health_check_type" {
+  description = "Controls how health checking is done."
+  default     = "ELB"
+}
+
+variable "health_check_grace_period" {
+  description = "Time after instance comes into service before checking health."
+  default     = 300
 }
 
 variable "health_check_healthy_threshold" {
@@ -188,9 +201,4 @@ variable "health_check_path" {
 variable "health_check_port" {
   description = "The port for the health check request."
   default     = "80"
-}
-
-variable "ec2_maintenance_ports" {
-  type    = "list"
-  default = []
 }
