@@ -1,4 +1,3 @@
-
 /**
  * Required Variables.
  */
@@ -43,7 +42,6 @@ variable "vpc_id" {
   description = "VPC ID."
 }
 
-
 /**
  * Optional Variables.
  */
@@ -55,7 +53,7 @@ variable "ec2_maintenance_ports" {
 
 variable "ec2_role_tag" {
   description = "Role tag value applied to the EC2 instances created by ASG."
-  default = "ASG"
+  default     = "ASG"
 }
 
 variable "iam_instance_profile" {
@@ -120,6 +118,11 @@ variable "health_check_type" {
 
 variable "wait_for_elb_capacity" {
   description = "Setting this will cause Terraform to wait for exactly this number of healthy instances in all attached load balancers on both create and update operations."
+  default     = 2
+}
+
+variable "min_elb_capacity" {
+  description = "Setting this causes Terraform to wait for this number of instances to show up healthy in the ELB only on creation. Updates will not wait on ELB instance number changes."
   default     = 2
 }
 

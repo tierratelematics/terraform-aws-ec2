@@ -1,4 +1,3 @@
-
 /**
  * Required Variables.
  */
@@ -23,7 +22,6 @@ variable "vpc_subnets" {
   type        = "list"
   description = "A list of subnet IDs to launch resources in."
 }
-
 
 /**
  * Options.
@@ -51,17 +49,17 @@ variable "lb_protocol" {
 
 variable "idle_timeout" {
   description = "The time in seconds that the connection is allowed to be idle."
-  default = "60"
+  default     = "60"
 }
 
 variable "connection_draining" {
   description = "Boolean to enable connection draining."
-  default = false
+  default     = false
 }
 
 variable "connection_draining_timeout" {
   description = "The time in seconds to allow for connections to drain."
-  default = "300"
+  default     = "300"
 }
 
 variable "health_check_healthy_threshold" {

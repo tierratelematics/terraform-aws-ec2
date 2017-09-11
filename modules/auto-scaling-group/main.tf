@@ -20,6 +20,7 @@ resource "aws_autoscaling_group" "asg" {
   max_size                  = "${var.max_size}"
   min_size                  = "${var.min_size}"
   wait_for_elb_capacity     = "${var.wait_for_elb_capacity}"
+  min_elb_capacity          = "${var.min_elb_capacity}"
   desired_capacity          = "${var.desired_capacity}"
   health_check_grace_period = "${var.health_check_grace_period}"
   health_check_type         = "${var.health_check_type}"
