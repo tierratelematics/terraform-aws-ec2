@@ -19,6 +19,8 @@ module "auto-scaling-group" {
   vpc_security_groups    = "${var.vpc_security_groups}"
   instance_type          = "${var.instance_type}"
   desired_capacity       = "${var.desired_capacity}"
+  wait_for_elb_capacity  = "${var.wait_for_elb_capacity}"
+  min_elb_capacity       = "${var.min_elb_capacity}"
   min_size               = "${var.min_size}"
   max_size               = "${var.max_size}"
   key_name               = "${var.key_name}"

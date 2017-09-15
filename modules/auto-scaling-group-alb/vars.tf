@@ -140,6 +140,11 @@ variable "wait_for_elb_capacity" {
   default     = 2
 }
 
+variable "min_elb_capacity" {
+  description = "Setting this causes Terraform to wait for this number of instances to show up healthy in the ELB only on creation. Updates will not wait on ELB instance number changes."
+  default     = 2
+}
+
 variable "desired_capacity" {
   description = " The number of Amazon EC2 instances that should be running in the group."
   default     = 2
