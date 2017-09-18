@@ -13,14 +13,24 @@ variable "environment" {
 variable "key_name" {}
 
 variable "vpc_id" {}
+
 variable "vpc_subnet_id" {}
 
 /**
  * Options.
  */
 
+variable "component" {
+  default = "bastion"
+}
+
 variable "instance_type" {
   default = "t2.nano"
+}
+
+variable "external_dns_name" {
+  description = "The external DNS (domain) name"
+  default = ""
 }
 
 //variable "vpc_security_group_ids" {
