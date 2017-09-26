@@ -9,7 +9,7 @@ named `main.tf`:
 
 ```hcl
 module "auto-scaling-group" {
-  source = "git::https://github.com/tierratelematics/terraform-aws-ec2.git//modules/auto-scaling-group?ref=0.2.0"
+  source = "git::https://github.com/tierratelematics/terraform-aws-ec2.git//modules/auto-scaling-group-alb?ref=0.4.0"
 
   project                     = "${var.project}"
   environment                 = "${terraform.env}"
@@ -38,7 +38,7 @@ If you instance access AWS service you cou can specify an instance profile using
 
 ```hcl
 module "auto-scaling-group" {
-  source = "git::https://github.com/tierratelematics/terraform-aws-ec2.git//modules/auto-scaling-group?ref=0.2.0"
+  source = "git::https://github.com/tierratelematics/terraform-aws-ec2.git//modules/auto-scaling-group-alb?ref=0.4.0"
 
   project                     = "${var.project}"
   environment                 = "${terraform.env}"
@@ -68,7 +68,7 @@ You can also specify a custom `user_data` parameter, using the handy `template_f
 
 ```hcl
 module "auto-scaling-group" {
-  source = "git::https://github.com/tierratelematics/terraform-aws-ec2.git//modules/auto-scaling-group?ref=0.2.0"
+  source = "git::https://github.com/tierratelematics/terraform-aws-ec2.git//modules/auto-scaling-group-alb?ref=0.4.0"
 
   project                     = "${var.project}"
   environment                 = "${terraform.env}"
@@ -98,7 +98,7 @@ If you need to expose some ports to access maintenance services use the `ec2_mai
 
 ```hcl
 module "auto-scaling-group" {
-  source = "git::https://github.com/tierratelematics/terraform-aws-ec2.git//modules/auto-scaling-group?ref=0.2.0"
+  source = "git::https://github.com/tierratelematics/terraform-aws-ec2.git//modules/auto-scaling-group-alb?ref=0.4.0"
 
   project                     = "${var.project}"
   environment                 = "${terraform.env}"
