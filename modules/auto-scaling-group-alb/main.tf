@@ -33,7 +33,7 @@ module "auto-scaling-group" {
 }
 
 module "alb" {
-  source = "git::https://github.com/tierratelematics/terraform-aws-ecs.git//modules/alb?ref=0.6.0"
+  source = "git::https://github.com/tierratelematics/terraform-aws-ecs.git//modules/alb?ref=0.6.1"
 
   project     = "${var.project}"
   environment = "${var.environment}"
